@@ -60,7 +60,7 @@ public extension URLRequest {
         let stringToSign = [URLRequest.kHMACShaTypeString, date.full, credentials, canonicalRequestHash].joined(separator: "\n")
 
         let signature = try [date.short, awsRegion, serviceName, URLRequest.kAWS4Request, stringToSign].reduce([UInt8]("AWS4\(secretAccessKey)".utf8), {
-            try HMAC(key: $0, variant: .sha256).authenticate([UInt8]($1.utf8))
+            try HMAC(key: $0, variant: .sha2(.sha256)).authenticate([UInt8]($1.utf8))
         }).toHexString()
 
         let authorization = URLRequest.kHMACShaTypeString + " Credential=" + accessKeyId + "/" + credentials + ", SignedHeaders=" + signedHeaders + ", Signature=" + signature

@@ -4,6 +4,7 @@ import PackageDescription
 
 let package = Package(
     name: "AwsSign",
+    platforms: [.macOS(.v10_12)],
     products: [.library(name: "AwsSign", targets: ["AwsSign"])],
     dependencies: [.package(url: "https://github.com/krzyzanowskim/CryptoSwift.git", from: "1.3.1")],
     targets: [.target(name: "AwsSign", dependencies: ["CryptoSwift"], path: "Source")],
